@@ -75,14 +75,9 @@ public class OrderService {
         return mapToResponse(order);
     }
 
-    public OrderResponse getOrder(String username, Long id) {
+    public OrderResponse getOrder(Long id) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada"));
-
-        // Validar que la orden pertenece al usuario autenticado
-        if (!order.getUsername().equals(username)) {
-            throw new ResourceNotFoundException("Orden no encontrada para el usuario autenticado");
-        }
 
         return mapToResponse(order);
     }
